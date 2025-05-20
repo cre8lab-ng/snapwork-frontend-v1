@@ -1,8 +1,8 @@
 
 import ExploreServices from "@/components/explore-services";
-import OTPModal from "@/components/modals/otp";
-import SignInModal from "@/components/modals/sign-in";
-import { SignUpModal } from "@/components/modals/sign-up";
+import OTPModal from "@/components/ui/modals/otp";
+import SignInModal from "@/components/ui/modals/sign-in";
+import { SignUpModal } from "@/components/ui/modals/sign-up";
 import Navbar from "@/components/navbar";
 import PromoBanners from "@/components/promo-banners";
 import WebPageTitle from "@/components/webpagetitle";
