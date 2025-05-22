@@ -4,14 +4,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { notifyError, notifySuccess } from "@/util/utils";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import useAuthentication from "@/stores/useAuthentication";
 
-type SignInFormValues = {
-  email: string;
-  password: string;
-  phone: string;
-};
+// Regex for email and Nigerian phone numbers
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^\d{9,15}$/;
 
 export default function SignInModal({
   onClose,
@@ -22,60 +20,41 @@ export default function SignInModal({
   onContinue: () => void;
   onSwitchToSignUp: () => void;
 }) {
-  const [countryCode, setCountryCode] = useState("234");
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuthentication();
-
-  console.log(onContinue, isLoading);
-  
-  
-  const handleSubmit = async (values: SignInFormValues) => {    setIsLoading(true);
-    console.log("ff");
-    const payload = {
-      email: values.email,
-      password: values.password,
-    };
-    try {
-      const response = await signIn(payload);
-      notifySuccess(response.message);
-      setIsLoading(false);
-      localStorage.setItem("user-email", values.email);
-      router.push({
-        pathname: "/onboarding/otp",
-        query: { source: "sign-in" },
-      });
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Something went wrong";
-      notifyError(message);
-    
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+  console.log(onContinue);
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      phone: "",
+      identifier: "",
     },
     validationSchema: Yup.object().shape({
-      email: Yup.string()
-        .email("Enter a valid email")
-        .matches(
-          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-          "Email must have a valid provider"
-        )
-        .required("Email address is required!"),
-      password: Yup.string().required("Password is required!"),
-      phone: Yup.string()
-        .matches(/^\d{9,15}$/, "Enter a valid phone number")
-        .required("Phone number is required!"),
+      identifier: Yup.string()
+        .required("Email or phone number is required")
+        .test(
+          "is-valid-email-or-phone",
+          "Must be a valid email or phone number",
+          (value) => {
+            if (!value) return false;
+            return emailRegex.test(value) || phoneRegex.test(value);
+          }
+        ),
     }),
-    validateOnMount: true,
-
-    onSubmit: handleSubmit,
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        const response = await signIn({ emailOrPhone: values.identifier });
+        notifySuccess(response.message || "OTP sent successfully");
+        localStorage.setItem("user-identifier", values.identifier);
+        router.push(`/onboarding/otp?source=sign-in`);
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : "Something went wrong";
+        notifyError(message);
+      } finally {
+        setIsLoading(false);
+      }
+    },
   });
 
   return (
@@ -85,96 +64,45 @@ export default function SignInModal({
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500"
         >
-          X{" "}
+          X
         </button>
 
         <h2 className="text-2xl font-semibold text-center">Sign in</h2>
         <p className="text-center text-gray-500 mt-1 mb-6">
-          Sign in to continue
+          Enter your email or phone number
         </p>
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div>
             <label
-              htmlFor="phone"
+              htmlFor="identifier"
               className="text-sm font-medium text-blue-900 block mb-1"
             >
-              Phone number
-            </label>
-            <div className="flex rounded-md overflow-hidden border border-gray-300">
-              <select
-                className="px-3 py-2 bg-gray-100 text-sm outline-none"
-                value={countryCode}
-                onChange={(e) => setCountryCode(e.target.value)}
-              >
-                <option value="234">NG</option>
-              </select>
-              <input
-                type="text"
-                id="phone"
-                name="phone"
-                placeholder="743 5501 903"
-                className="flex-1 px-3 py-2 text-sm bg-gray-100 outline-none"
-                value={formik.values.phone}
-                onChange={formik.handleChange}
-              />
-            </div>
-            {formik.touched.phone && formik.errors.phone && (
-              <p className="text-red-500 text-sm mt-1">{formik.errors.phone}</p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="text-sm font-medium text-blue-900 block mb-1"
-            >
-              Email
+              Email or Phone
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
+              type="text"
+              id="identifier"
+              name="identifier"
+              placeholder="you@example.com or 7435501903"
               className="w-full px-3 py-2 text-sm bg-gray-100 border border-gray-300 rounded-md"
-              value={formik.values.email}
+              value={formik.values.identifier}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.email && formik.errors.email && (
-              <p className="text-red-500 text-sm mt-1">{formik.errors.email}</p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="text-sm font-medium text-blue-900 block mb-1"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              className="w-full px-3 py-2 text-sm bg-gray-100 border border-gray-300 rounded-md"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.password && formik.errors.password && (
+            {formik.touched.identifier && formik.errors.identifier && (
               <p className="text-red-500 text-sm mt-1">
-                {formik.errors.password}
+                {formik.errors.identifier}
               </p>
             )}
           </div>
 
           <button
             type="submit"
+            disabled={isLoading}
             className="w-full bg-[#1A2D7A] text-white py-2.5 rounded-xl text-sm font-medium"
           >
-            Sign in
+            {isLoading ? "Sending OTP..." : "Continue"}
           </button>
 
           <p className="text-sm text-center text-gray-500">
