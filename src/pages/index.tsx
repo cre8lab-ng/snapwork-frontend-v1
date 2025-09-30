@@ -81,6 +81,22 @@ export default function Home() {
     },
   ];
 
+  const getServiceBackgroundColor = (index: number) => {
+    const colors = [
+      'bg-green-100',    // Light green
+      'bg-purple-100',   // Light purple
+      'bg-pink-100',     // Light pink
+      'bg-yellow-100',   // Light yellow
+      'bg-orange-100',   // Light orange
+      'bg-green-200',    // Medium green
+      'bg-purple-200',   // Medium purple
+      'bg-pink-200',     // Medium pink
+      'bg-yellow-200',   // Medium yellow
+      'bg-orange-200',   // Medium orange
+    ];
+    return colors[index % colors.length];
+  };
+
   const handleServiceSelect = (service: Service) => {
     console.log("Selected service:", service);
   };
@@ -111,11 +127,11 @@ export default function Home() {
             </h2>
 
             <div className="flex gap-3 flex-wrap">
-              {services.map((service) => (
+              {services.map((service, index) => (
                 <button
                   key={service.id}
                   onClick={() => handleServiceSelect(service)}
-                  className="flex flex-col items-center justify-center bg-white rounded-2xl p-4 hover:shadow-md transition cursor-pointer w-[120px] h-24 flex-shrink-0 border border-gray-100"
+                  className={`flex flex-col items-center justify-center ${getServiceBackgroundColor(index)} rounded-2xl p-4 hover:shadow-md transition cursor-pointer w-[120px] h-24 flex-shrink-0 border border-gray-100`}
                 >
                   <Icon name={service.icon} size="1.5" />
                   <p className="text-xs font-medium text-center text-[#0D0D0D] mt-1">
@@ -127,92 +143,77 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Header Section */}
-
-          {/* Promotional Banners */}
-          <section className="grid md:grid-cols-2 gap-8">
-            {/* Service Promotion Banner */}
-            <div className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 rounded-3xl p-8 h-64 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-4 right-4 w-32 h-32 bg-blue-200 rounded-full blur-2xl"></div>
-                <div className="absolute bottom-4 left-4 w-24 h-24 bg-indigo-200 rounded-full blur-xl"></div>
+        {/* Promotional Banners */}
+        <section className="w-full">
+          {/* Service Promotion Banner */}
+          <div className="relative bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300 group min-h-[180px] mb-6">
+            <div className="flex items-center h-full">
+              <div className="flex-1 pr-6">
+                <div className="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full mb-3">
+                  SPECIAL OFFER
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 leading-tight mb-2">
+                  Don&apos;t miss out on <br />
+                  <span className="text-blue-600">
+                    getting the best service
+                  </span>
+                </h3>
+                <div className="flex items-center space-x-2 mb-4">
+                  <span className="text-sm text-gray-600">Starting from</span>
+                  <span className="text-xl font-bold text-blue-600">
+                    ₦3,000
+                  </span>
+                </div>
+                <button className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm">
+                  Book Now
+                </button>
               </div>
 
-              <div className="relative z-10 h-full flex items-center justify-between">
-                <div className="flex-1 pr-4">
-                  <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full mb-4">
-                    SPECIAL OFFER
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 leading-tight mb-3">
-                    Don&apos;t miss out on <br />
-                    <span className="text-blue-600">
-                      getting the best service
-                    </span>
-                  </h3>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">Starting from</span>
-                    <span className="text-2xl font-bold text-blue-600">
-                      ₦3,000
-                    </span>
-                  </div>
-                  <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium">
-                    Book Now
-                  </button>
-                </div>
-
-                <div className="relative w-40 h-40 flex-shrink-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+              <div className="relative w-36 h-36 flex-shrink-0 bg-blue-50 rounded-xl flex items-end justify-center overflow-hidden">
+                <div className="relative w-32 h-32">
                   <Image
                     src="/images/electrician-cropped.svg"
                     alt="Professional Electrician Service"
                     fill
-                    className="object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
+                    className="object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Provider Recruitment Banner */}
-            <div className="relative bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-700 rounded-3xl p-8 h-64 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
-              {/* Background Pattern */}
-              <div className="absolute inset-0">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-pink-300 opacity-20 rounded-full blur-2xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-white opacity-10 rounded-full"></div>
-              </div>
-
-              <div className="relative z-10 h-full flex items-center justify-between">
-                <div className="relative w-40 h-40 flex-shrink-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl opacity-30 group-hover:opacity-40 transition-opacity duration-300"></div>
+          {/* Provider Recruitment Banner */}
+          <div className="relative bg-gradient-to-br from-purple-600 to-blue-700 rounded-2xl p-6 hover:shadow-md transition-all duration-300 group min-h-[180px]">
+            <div className="flex items-center h-full">
+              <div className="relative w-36 h-36 flex-shrink-0 bg-white bg-opacity-10 rounded-xl flex items-end justify-center mr-6 overflow-hidden">
+                <div className="relative w-32 h-32">
                   <Image
                     src="/images/cleaner-cropped.svg"
                     alt="Join Our Service Providers"
                     fill
-                    className="object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
+                    className="object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
+              </div>
 
-                <div className="flex-1 pl-4 text-right">
-                  <div className="inline-block px-3 py-1 bg-white bg-opacity-20 text-white text-xs font-semibold rounded-full mb-4">
-                    EARN MONEY
-                  </div>
-                  <h3 className="text-2xl font-bold text-white leading-tight mb-3">
-                    <span className="text-yellow-300">Urgent 2k?</span>
-                    <br />
-                    Join our line of trusted
-                    <br />
-                    <span className="text-pink-200">service providers</span>
-                  </h3>
-                  <button className="mt-4 px-6 py-2 bg-white text-purple-700 rounded-lg hover:bg-gray-100 transition-colors duration-200 font-medium">
-                    Join Now
-                  </button>
+              <div className="flex-1 text-right">
+                <div className="inline-block px-3 py-1 bg-white bg-opacity-20 text-white text-xs font-medium rounded-full mb-3">
+                  EARN MONEY
                 </div>
+                <h3 className="text-xl font-semibold text-white leading-tight mb-2">
+                  <span className="text-yellow-300">Urgent 2k?</span>
+                  <br />
+                  Join our line of trusted
+                  <br />
+                  <span className="text-pink-200">service providers</span>
+                </h3>
+                <button className="px-5 py-2 bg-white text-purple-700 rounded-lg hover:bg-gray-100 transition-colors duration-200 font-medium text-sm">
+                  Join Now
+                </button>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
 
       {/* Modals */}

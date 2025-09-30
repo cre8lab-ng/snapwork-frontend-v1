@@ -1,152 +1,255 @@
-import React from 'react';
-import Link from 'next/link';
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { useState } from "react";
+import Icon from "./icon";
+import Image from "next/image";
+import Link from "next/link";
+import * as Yup from "yup";
+import { FormikHelpers } from "formik";
+import { Input,Form } from "./ui/form";
+import { Button } from "./ui/button";
 
-const Footer: React.FC = () => {
+export default function Footer() {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const toggleSection = (section: string) => {
+    setOpenSection(openSection === section ? null : section);
+  };
+
+  const isOpen = (section: string) => openSection === section;
+
+  // Newsletter form validation schema
+  const newsletterValidationSchema = Yup.object({
+    email: Yup.string()
+      .email("Please enter a valid email address")
+      .required("Email address is required"),
+  });
+
+  // Newsletter form initial values
+  const newsletterInitialValues = {
+    email: "",
+  };
+
+  // Newsletter form submission handler
+  const handleNewsletterSubmit = async (
+    values: { email: string },
+    { setSubmitting, resetForm }: FormikHelpers<{ email: string }>
+  ) => {
+    try {
+      console.log("Newsletter subscription:", values);
+      // Here you would typically send the email to your newsletter service
+      alert("Thank you for subscribing to our newsletter!");
+      resetForm();
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      alert(
+        "There was an error subscribing to the newsletter. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
-    <footer className="bg-white border-t border-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand Section */}
+    <footer className="bg-darkblue text-white section-spacing px-16">
+      <div className="mx-auto">
+        {/* Main content grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-6">
+          {/* Newsletter signup section */}
+          <div className="lg:col-span-2 lg:pr-8">
+            <h2 className="text-subtitle component-spacing leading-relaxed !text-white">
+              Stay updated with Snapwork by signing up for our newsletter
+            </h2>
+            <Form
+              initialValues={newsletterInitialValues}
+              validationSchema={newsletterValidationSchema}
+              onSubmit={handleNewsletterSubmit}
+              className="space-y-6"
+            >
+              <Input
+                name="email"
+                type="email"
+                placeholder="Email Address"
+                className="w-full rounded-lg px-6 py-4 text-blue-300 border border-gray-300 placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              />
+              <Button
+                type="submit"
+                variant="secondary"
+                className="w-auto px-10 py-3"
+              >
+                Subscribe
+              </Button>
+            </Form>
+          </div>
+
+          {/* Company section */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">S</span>
+            <div
+              className="flex justify-between items-center lg:block cursor-pointer lg:cursor-default"
+              onClick={() => toggleSection("company")}
+            >
+              <h3 className="text-medium font-semibold element-spacing tracking-wide !text-white">
+                COMPANY
+              </h3>
+              <div className="lg:hidden">
+                <Image
+                  src="/images/dropdown.svg"
+                  alt="Dropdown"
+                  width={20}
+                  height={20}
+                  className={`transform transition-transform filter invert ${
+                    isOpen("company") ? "rotate-180" : ""
+                  }`}
+                />
               </div>
-              <span className="text-xl font-bold text-gray-900">Snapwork</span>
             </div>
-          </div>
-
-          {/* Locations Section */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-              LOCATIONS
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/locations/kubwa-nysc-camp" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Kubwa Nysc camp
-                </Link>
+            <ul
+              className={`space-y-3 lg:block ${
+                isOpen("company") ? "block" : "hidden lg:block"
+              } text-blue-100`}
+            >
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <Link href="/about">About Us</Link>
               </li>
-              <li>
-                <Link href="/locations/achimota" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Achimota
-                </Link>
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <Link href="/join-us">Join as a service provider</Link>
               </li>
-              <li>
-                <Link href="/locations/kwabenya-ashongman" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Kwabenya-Ashongman
-                </Link>
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <Link href="/terms-of-use">Terms of use</Link>
               </li>
-              <li>
-                <Link href="/locations/lokogoma" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Lokogoma
-                </Link>
-              </li>
-              <li>
-                <Link href="/locations/makurdi" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Makurdi
-                </Link>
-              </li>
-              <li>
-                <Link href="/locations/jos" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Jos
-                </Link>
-              </li>
-              <li>
-                <Link href="/locations" className="text-green-600 hover:text-green-700 font-medium transition-colors duration-200">
-                  See more
-                </Link>
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <Link href="/privacy-policy">Privacy Policy</Link>
               </li>
             </ul>
           </div>
 
-          {/* Download Section */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-              DOWNLOAD
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="https://play.google.com/store" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Google Play Store
-                </Link>
+          {/* Quick Links section */}
+          <div className="lg:col-span-1">
+            <div
+              className="flex justify-between items-center lg:block cursor-pointer lg:cursor-default"
+              onClick={() => toggleSection("quick")}
+            >
+              <h3 className="text-medium font-semibold element-spacing tracking-wide !text-white">
+                QUICK LINKS
+              </h3>
+              <div className="lg:hidden">
+                <Image
+                  src="/images/dropdown.svg"
+                  alt="Dropdown"
+                  width={20}
+                  height={20}
+                  className={`transform transition-transform filter invert ${
+                    isOpen("quick") ? "rotate-180" : ""
+                  }`}
+                />
+              </div>
+            </div>
+            <ul
+              className={`space-y-3 lg:block ${
+                isOpen("quick") ? "block" : "hidden lg:block"
+              } text-blue-100`}
+            >
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <a
+                  href="https://book-snapwork.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  Book Now
+                </a>
               </li>
-              <li>
-                <Link href="https://apps.apple.com" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  iOS App Store
-                </Link>
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <Link href="/faq">FAQ</Link>
               </li>
-            </ul>
-
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4 mt-8">
-              GET HELP
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="mailto:support@snapwork.com" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Email
-                </Link>
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <Link href="/get-a-quote">Get a quote</Link>
+              </li>
+              <li className="hover:text-white cursor-pointer transition-colors font-medium">
+                <Link href="/services">Services</Link>
               </li>
             </ul>
           </div>
 
-          {/* Legal Section */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-              LEGAL
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/privacy-policy" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Privacy Policy
+          {/* Contact section */}
+          <div className="lg:col-span-1">
+            <div
+              className="flex justify-between items-center lg:block cursor-pointer lg:cursor-default"
+              onClick={() => toggleSection("contact")}
+            >
+              <h3 className="text-medium font-semibold element-spacing tracking-wide !text-white">
+                CONTACT
+              </h3>
+              <div className="lg:hidden">
+                <Image
+                  src="/images/dropdown.svg"
+                  alt="Dropdown"
+                  width={20}
+                  height={20}
+                  className={`transform transition-transform filter invert ${
+                    isOpen("contact") ? "rotate-180" : ""
+                  }`}
+                />
+              </div>
+            </div>
+            <ul
+              className={`space-y-4 lg:block ${
+                isOpen("contact") ? "block" : "hidden lg:block"
+              } text-blue-100`}
+            >
+              <li className="flex items-center gap-3 hover:text-white transition-colors">
+                <Icon name="mail" />
+                <Link href="mailto:snap@work.ng" className="font-medium">
+                  snap@work.ng
                 </Link>
               </li>
-              <li>
-                <Link href="/terms-of-use" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Terms of use
+              <li className="flex items-center gap-3 hover:text-white transition-colors">
+                <Icon name="whatsapp" />
+                <Link
+                  href="https://wa.me/23404059336711"
+                  className="font-medium"
+                >
+                  +23404059336711
+                </Link>
+              </li>
+              <li className="flex items-center gap-3 hover:text-white transition-colors">
+                <Icon name="phone" />
+                <Link href="tel:+23404059336711" className="font-medium">
+                  +23404059336711
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm">
-              © 2024, Snapwork.
-            </p>
-            
-            {/* Social Media Icons */}
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <Link 
-                href="https://facebook.com" 
-                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
-                aria-label="Facebook"
-              >
-                <FaFacebookF className="w-5 h-5" />
-              </Link>
-              <Link 
-                href="https://instagram.com" 
-                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
-                aria-label="Instagram"
-              >
-                <FaInstagram className="w-5 h-5" />
-              </Link>
-              <Link 
-                href="https://twitter.com" 
-                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
-                aria-label="Twitter"
-              >
-                <FaTwitter className="w-5 h-5" />
-              </Link>
+        {/* Bottom section with logo and social icons */}
+        <div className="mt-16 pt-8 border-t border-blue-700/50 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="flex-shrink-0">
+            <Image
+              src="/images/snapwork-logo-white.svg"
+              alt="Snapwork Logo"
+              width={0}
+              height={0}
+              className="w-auto h-auto"
+            />
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="hover:scale-110 transition-transform cursor-pointer">
+              <Icon name="linkedIn-bg" />
+            </div>
+            <div className="hover:scale-110 transition-transform cursor-pointer">
+              <Icon name="instagram-bg" />
+            </div>
+            <div className="hover:scale-110 transition-transform cursor-pointer">
+              <Icon name="mail-bg" />
+            </div>
+            <div className="hover:scale-110 transition-transform cursor-pointer">
+              <Icon name="twitter-bg" />
+            </div>
+            <div className="hover:scale-110 transition-transform cursor-pointer">
+              <Icon name="whatsapp-bg" />
             </div>
           </div>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
