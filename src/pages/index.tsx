@@ -115,9 +115,9 @@ export default function Home() {
                 <button
                   key={service.id}
                   onClick={() => handleServiceSelect(service)}
-                  className="flex flex-col items-center justify-center bg-white rounded-2xl p-4 hover:shadow-md transition cursor-pointer min-w-[100px] h-24 flex-shrink-0 border border-gray-100"
+                  className="flex flex-col items-center justify-center bg-white rounded-2xl p-4 hover:shadow-md transition cursor-pointer w-[120px] h-24 flex-shrink-0 border border-gray-100"
                 >
-                  <Icon name={service.icon} size="2" />
+                  <Icon name={service.icon} size="1.5" />
                   <p className="text-xs font-medium text-center text-[#0D0D0D] mt-1">
                     {service.title}
                   </p>

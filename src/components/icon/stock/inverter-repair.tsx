@@ -3,8 +3,8 @@ import React from "react";
 const SVG: React.FC = () => {
   return (
     <svg
-      width="149"
-      height="60"
+      width="75"
+      height="30"
       viewBox="0 0 149 60"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
