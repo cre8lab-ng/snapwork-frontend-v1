@@ -91,61 +91,44 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="bg-gray-50 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Banner Image */}
-          <div className="mb-8 rounded-lg overflow-hidden shadow-sm">
-            <Image
-              src="/images/artisans-banner.svg"
-              alt="Artisan hands banner"
-              width={1200}
-              height={200}
-              className="w-full h-auto"
-              priority
-            />
-          </div>
+        {/* Full Width Banner Image */}
+        <div className="w-full bg-blue-50 mb-8 h-32 overflow-hidden">
+          <Image
+            src="/images/artisans-banner.svg"
+            alt="Artisan hands banner"
+            width={1200}
+            height={128}
+            className="w-full h-full object-cover object-top"
+            priority
+          />
+        </div>
 
-          {/* Header Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Find Skilled Artisans Near You
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Connect with trusted professionals for all your home and business
-              needs
-            </p>
-          </div>
+        {/* Full Width Services Section */}
+        <section className="w-full bg-gray-50 py-8 mb-8">
+          <div className="px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              Explore Services
+            </h2>
 
-          {/* Services Section */}
-          <section className="mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Explore Services
-              </h2>
-              <button className="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-                <span className="text-sm font-medium">Filter</span>
-                <div className="flex space-x-1">
-                  <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-                  <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-                  <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-                </div>
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="flex gap-3 flex-wrap">
               {services.map((service) => (
                 <button
                   key={service.id}
                   onClick={() => handleServiceSelect(service)}
-                  className="flex flex-col items-center justify-center bg-[#F3F7FF] rounded-lg p-4 hover:shadow-md hover:bg-blue-50 transition cursor-pointer h-32"
+                  className="flex flex-col items-center justify-center bg-white rounded-2xl p-4 hover:shadow-md transition cursor-pointer min-w-[100px] h-24 flex-shrink-0 border border-gray-100"
                 >
-                  <Icon name={service.icon} />
-                  <p className="text-sm font-medium text-center text-[#0D0D0D] mt-2">
+                  <Icon name={service.icon} size="2" />
+                  <p className="text-xs font-medium text-center text-[#0D0D0D] mt-1">
                     {service.title}
                   </p>
                 </button>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Header Section */}
 
           {/* Promotional Banners */}
           <section className="grid md:grid-cols-2 gap-8">
