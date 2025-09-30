@@ -1,10 +1,19 @@
 import Image from "next/image";
+import { useGeolocation } from "../hooks/useGeolocation";
 
 interface NavbarProps {
   onUserClick: () => void;
 }
 
 export default function Navbar({ onUserClick }: NavbarProps) {
+  const { address, loading, error } = useGeolocation();
+
+  const getLocationDisplay = () => {
+    if (loading) return "Getting your location...";
+    if (error) return "Unable to get location";
+    return address || "Location not available";
+  };
+
   return (
     <div className="flex items-center justify-between px-4 py-2 bg-white shadow-sm">
       <div className="flex items-center space-x-3">
@@ -15,7 +24,7 @@ export default function Navbar({ onUserClick }: NavbarProps) {
           height={50}
         />
         <div className="flex items-center text-gray-500 space-x-2">
-          <span>Put in your location.....</span>
+          <span>{getLocationDisplay()}</span>
         </div>
       </div>
 
