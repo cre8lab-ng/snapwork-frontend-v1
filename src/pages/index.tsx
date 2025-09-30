@@ -126,7 +126,7 @@ export default function Home() {
               Explore Services
             </h2>
 
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-4 flex-wrap">
               {services.map((service, index) => (
                 <button
                   key={service.id}
@@ -144,72 +144,74 @@ export default function Home() {
         </section>
 
         {/* Promotional Banners */}
-        <section className="w-full">
-          {/* Service Promotion Banner */}
-          <div className="relative bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300 group min-h-[180px] mb-6">
-            <div className="flex items-center h-full">
-              <div className="flex-1 pr-6">
-                <div className="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full mb-3">
-                  SPECIAL OFFER
+        <section className="w-full py-8">
+          <div className="px-4 sm:px-6 lg:px-8">
+            {/* Service Promotion Banner */}
+            <div className="relative bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-all duration-300 group min-h-[180px] mb-6">
+              <div className="flex items-center h-full">
+                <div className="flex-1 pr-6">
+                  <div className="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full mb-3">
+                    SPECIAL OFFER
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 leading-tight mb-2">
+                    Don&apos;t miss out on <br />
+                    <span className="text-blue-600">
+                      getting the best service
+                    </span>
+                  </h3>
+                  <div className="flex items-center space-x-2 mb-4">
+                    <span className="text-sm text-gray-600">Starting from</span>
+                    <span className="text-xl font-bold text-blue-600">
+                      ₦3,000
+                    </span>
+                  </div>
+                  <button className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm">
+                    Book Now
+                  </button>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 leading-tight mb-2">
-                  Don&apos;t miss out on <br />
-                  <span className="text-blue-600">
-                    getting the best service
-                  </span>
-                </h3>
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-sm text-gray-600">Starting from</span>
-                  <span className="text-xl font-bold text-blue-600">
-                    ₦3,000
-                  </span>
-                </div>
-                <button className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium text-sm">
-                  Book Now
-                </button>
-              </div>
 
-              <div className="relative w-36 h-36 flex-shrink-0 bg-blue-50 rounded-xl flex items-end justify-center overflow-hidden">
-                <div className="relative w-32 h-32">
-                  <Image
-                    src="/images/electrician-cropped.svg"
-                    alt="Professional Electrician Service"
-                    fill
-                    className="object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
+                <div className="relative w-36 h-36 flex-shrink-0 bg-blue-50 rounded-xl flex items-end justify-center overflow-hidden">
+                  <div className="relative w-32 h-32">
+                    <Image
+                      src="/images/electrician-cropped.svg"
+                      alt="Professional Electrician Service"
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Provider Recruitment Banner */}
-          <div className="relative bg-gradient-to-br from-purple-600 to-blue-700 rounded-2xl p-6 hover:shadow-md transition-all duration-300 group min-h-[180px]">
-            <div className="flex items-center h-full">
-              <div className="relative w-36 h-36 flex-shrink-0 bg-white bg-opacity-10 rounded-xl flex items-end justify-center mr-6 overflow-hidden">
-                <div className="relative w-32 h-32">
-                  <Image
-                    src="/images/cleaner-cropped.svg"
-                    alt="Join Our Service Providers"
-                    fill
-                    className="object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
+            {/* Provider Recruitment Banner */}
+            <div className="relative bg-gradient-to-br from-purple-600 to-blue-700 rounded-2xl p-6 hover:shadow-md transition-all duration-300 group min-h-[180px]">
+              <div className="flex items-center h-full">
+                <div className="relative w-36 h-36 flex-shrink-0 bg-white bg-opacity-10 rounded-xl flex items-end justify-center mr-6 overflow-hidden">
+                  <div className="relative w-32 h-32">
+                    <Image
+                      src="/images/cleaner-cropped.svg"
+                      alt="Join Our Service Providers"
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex-1 text-right">
-                <div className="inline-block px-3 py-1 bg-white bg-opacity-20 text-white text-xs font-medium rounded-full mb-3">
-                  EARN MONEY
+                <div className="flex-1 text-right">
+                  <div className="inline-block px-3 py-1 bg-white bg-opacity-20 text-white text-xs font-medium rounded-full mb-3">
+                    EARN MONEY
+                  </div>
+                  <h3 className="text-xl font-semibold text-white leading-tight mb-2">
+                    <span className="text-yellow-300">Urgent 2k?</span>
+                    <br />
+                    Join our line of trusted
+                    <br />
+                    <span className="text-pink-200">service providers</span>
+                  </h3>
+                  <button className="px-5 py-2 bg-white text-purple-700 rounded-lg hover:bg-gray-100 transition-colors duration-200 font-medium text-sm">
+                    Join Now
+                  </button>
                 </div>
-                <h3 className="text-xl font-semibold text-white leading-tight mb-2">
-                  <span className="text-yellow-300">Urgent 2k?</span>
-                  <br />
-                  Join our line of trusted
-                  <br />
-                  <span className="text-pink-200">service providers</span>
-                </h3>
-                <button className="px-5 py-2 bg-white text-purple-700 rounded-lg hover:bg-gray-100 transition-colors duration-200 font-medium text-sm">
-                  Join Now
-                </button>
               </div>
             </div>
           </div>
