@@ -82,6 +82,13 @@ export default function Home() {
     },
   ];
 
+  // Available services (no coming soon tag)
+  const availableServices = ["1", "4", "5", "6", "7"];
+  
+  const isServiceAvailable = (serviceId: string) => {
+    return availableServices.includes(serviceId);
+  };
+
   const getServiceBackgroundColor = (index: number) => {
     const colors = [
       "bg-green-100", // Light green
@@ -132,14 +139,23 @@ export default function Home() {
                 <button
                   key={service.id}
                   onClick={() => handleServiceSelect(service)}
-                  className={`flex flex-col items-center justify-center ${getServiceBackgroundColor(
+                  className={`relative flex flex-col items-center justify-center ${getServiceBackgroundColor(
                     index
-                  )} rounded-2xl p-3 sm:p-4 hover:shadow-md transition cursor-pointer h-20 sm:h-24 border border-gray-100 min-w-0`}
+                  )} rounded-2xl p-3 sm:p-4 hover:shadow-md transition cursor-pointer h-20 sm:h-24 border border-gray-100 min-w-0 ${
+                    !isServiceAvailable(service.id) ? 'opacity-75' : ''
+                  }`}
                 >
                   <Icon name={service.icon} size="1.5" />
                   <p className="text-xs font-medium text-center text-[#0D0D0D] mt-1 leading-tight">
                     {service.title}
                   </p>
+                  {!isServiceAvailable(service.id) && (
+                    <div className="absolute top-1 right-1">
+                      <span className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        Coming Soon
+                      </span>
+                    </div>
+                  )}
                 </button>
               ))}
             </div>

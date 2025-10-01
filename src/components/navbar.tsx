@@ -25,42 +25,29 @@ export default function Navbar({ onUserClick }: NavbarProps) {
     <div className="bg-white shadow-sm">
       {/* Main Navbar */}
       <div className="flex items-center justify-between px-4 py-2">
-        {/* Left Section - Logo and Location */}
-        <div className="flex items-center space-x-2 md:space-x-3">
+        {/* Left Section - Logo only */}
+        <div className="flex items-center">
           <Image
-            src="/images/snapwork-icon.svg"
-            alt="Snapwork Icon"
-            width={40}
-            height={40}
-            className="md:w-[50px] md:h-[50px]"
+            src="/images/snapwork-logo.svg"
+            alt="Snapwork Logo"
+            width={0}
+            height={0}
+            className="w-auto h-auto"
           />
+        </div>
+
+        {/* Right Section - Location, Search Bar and Action Buttons */}
+        <div className="flex items-center space-x-2">
+          {/* Location Display - moved to extreme right */}
           <div className="hidden sm:flex items-center text-gray-500 space-x-2">
             <Icon name="location-pin" size="16" color="#6B7280" />
             <span className="text-xs md:text-sm truncate max-w-[120px] md:max-w-none">
               {getLocationDisplay()}
             </span>
           </div>
-        </div>
 
-        {/* Center Section - Search Bar (Desktop) */}
-        <div className="hidden lg:flex items-center space-x-2">
-          <div className="flex items-center border rounded px-3 py-2 text-gray-500 relative">
-            <input
-              type="text"
-              placeholder="Search for your next service......"
-              className="outline-none bg-transparent text-sm w-48 xl:w-64 pr-8"
-            />
-            <Icon 
-              name="search" 
-              size="16" 
-              color="#6B7280" 
-              className="absolute right-3"
-            />
-          </div>
-        </div>
+    
 
-        {/* Right Section - Action Buttons */}
-        <div className="flex items-center space-x-2">
           {/* Search Button (Mobile/Tablet) */}
           <button className="lg:hidden bg-gray-100 text-gray-600 p-2 rounded-full">
             <Icon name="search" size="18" color="#6B7280" />
