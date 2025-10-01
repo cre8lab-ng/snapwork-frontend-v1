@@ -127,17 +127,17 @@ export default function Home() {
               Explore Services
             </h2>
 
-            <div className="flex gap-4 flex-wrap">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4">
               {services.map((service, index) => (
                 <button
                   key={service.id}
                   onClick={() => handleServiceSelect(service)}
                   className={`flex flex-col items-center justify-center ${getServiceBackgroundColor(
                     index
-                  )} rounded-2xl p-4 hover:shadow-md transition cursor-pointer w-[120px] h-24 flex-shrink-0 border border-gray-100`}
+                  )} rounded-2xl p-3 sm:p-4 hover:shadow-md transition cursor-pointer h-20 sm:h-24 border border-gray-100 min-w-0`}
                 >
                   <Icon name={service.icon} size="1.5" />
-                  <p className="text-xs font-medium text-center text-[#0D0D0D] mt-1">
+                  <p className="text-xs font-medium text-center text-[#0D0D0D] mt-1 leading-tight">
                     {service.title}
                   </p>
                 </button>
