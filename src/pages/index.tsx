@@ -5,7 +5,7 @@ import WebPageTitle from "@/components/webpagetitle";
 import Icon from "@/components/icon";
 import Image from "next/image";
 import { useState } from "react";
-import { Sparkles, TrendingUp, Zap, ArrowRight } from "lucide-react";
+import { Sparkles, TrendingUp, ArrowRight } from "lucide-react";
 
 interface Service {
   id: string;
@@ -148,154 +148,129 @@ export default function Home() {
 
         {/* Promotional Banners */}
 
-        <section className="w-full py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-blue-50">
-          <div className="max-w-7xl mx-auto space-y-6">
-            {/* Service Promotion Banner - Glassmorphism Style */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 rounded-3xl shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 group">
-              {/* Animated background elements */}
-              <div className="absolute inset-0 opacity-30">
-                <div className="absolute top-0 -left-4 w-72 h-72 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
-                <div
-                  className="absolute bottom-0 -right-4 w-72 h-72 bg-cyan-200 rounded-full mix-blend-overlay filter blur-3xl animate-pulse"
-                  style={{ animationDelay: "1s" }}
-                ></div>
-              </div>
-
-              <div className="relative flex flex-col md:flex-row items-center p-8 md:p-10 gap-8">
+        <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+          <div className="max-w-7xl mx-auto space-y-8">
+            {/* Service Promotion Banner */}
+            <div className="relative overflow-hidden bg-[var(--color-darkblue)] rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 group">
+              <div className="relative flex flex-col lg:flex-row items-center justify-between p-10 lg:p-12 gap-10">
                 {/* Content */}
-                <div className="flex-1 text-white z-10">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Sparkles className="w-5 h-5 text-yellow-300 animate-pulse" />
-                    <span className="px-4 py-1.5 bg-white/20 backdrop-blur-sm text-white text-xs font-bold tracking-wider rounded-full border border-white/30">
+                <div className="flex-1 text-white z-10 max-w-2xl">
+                  <div className="flex items-center gap-2 mb-6">
+                    <Sparkles className="w-6 h-6 text-[var(--color-orange-100)]" />
+                    <span className="px-4 py-2 bg-white/20 text-white text-xs font-bold tracking-wider rounded-full border border-white/30">
                       LIMITED TIME OFFER
                     </span>
                   </div>
 
-                  <h3 className="text-3xl md:text-4xl font-bold leading-tight mb-3">
+                  <h3 className="text-h2 font-bold leading-tight mb-4 text-white">
                     Transform Your Space
                     <br />
-                    <span className="text-yellow-300 inline-flex items-center gap-2">
+                    <span className="text-[var(--color-orange-100)] inline-flex items-center gap-2">
                       Premium Services
-                      <Zap className="w-8 h-8 inline animate-bounce" />
                     </span>
                   </h3>
 
-                  <p className="text-blue-50 text-lg mb-6 max-w-md">
+                  <p className="text-white/80 text-lg mb-8 max-w-lg">
                     Expert professionals ready to deliver excellence at your
                     doorstep
                   </p>
 
-                  <div className="flex items-baseline gap-3 mb-6">
-                    <span className="text-white/80 text-base">
+                  <div className="flex items-baseline gap-3 mb-8">
+                    <span className="text-white/70 text-base">
                       Starting from
                     </span>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-5xl font-black text-yellow-300">
+                      <span className="text-4xl font-black text-[var(--color-orange-100)]">
                         ₦3,000
                       </span>
                       <span className="text-white/60 text-sm">/service</span>
                     </div>
                   </div>
 
-                  <button className="group/btn px-8 py-4 bg-white text-blue-600 rounded-2xl hover:bg-yellow-300 hover:text-blue-900 transition-all duration-300 font-bold text-base shadow-xl hover:shadow-2xl hover:scale-105 flex items-center gap-2">
+                  <button className="group/btn px-8 py-4 bg-[var(--color-orange-100)] text-[var(--color-darkblue)] rounded-xl hover:bg-[var(--color-orange-200)] transition-all duration-300 font-bold text-base shadow-lg hover:shadow-xl flex items-center gap-2">
                     Book Now
                     <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
 
-                {/* Image Container with 3D effect */}
-                <div className="relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0">
-                  <div className="absolute inset-0 bg-white/10 backdrop-blur-md rounded-3xl rotate-6 group-hover:rotate-12 transition-transform duration-500"></div>
-                  <div className="absolute inset-0 bg-white/20 backdrop-blur-lg rounded-3xl -rotate-3 group-hover:rotate-3 transition-transform duration-500"></div>
-                  <div className="relative w-full h-full bg-white/30 backdrop-blur-xl rounded-3xl flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-500 border-4 border-white/40">
-                    <div className="text-9xl">⚡</div>
+                {/* Image Container */}
+                <div className="relative w-64 h-64 lg:w-80 lg:h-80 flex-shrink-0">
+                  <div className="relative w-full h-full bg-white/10 rounded-3xl overflow-hidden group-hover:scale-105 transition-transform duration-300 border-2 border-white/20 shadow-lg">
+                    <Image
+                      src="/images/artisans.svg"
+                      alt="Professional artisan services"
+                      fill
+                      className="object-cover drop-shadow-lg"
+                    />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Provider Recruitment Banner - Modern Dark Theme */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-purple-900 via-purple-700 to-pink-600 rounded-3xl shadow-2xl hover:shadow-purple-500/50 transition-all duration-500 group">
-              {/* Animated grid background */}
-              <div className="absolute inset-0 opacity-10">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-                    backgroundSize: "50px 50px",
-                  }}
-                ></div>
-              </div>
-
-              {/* Floating orbs */}
-              <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-400 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
-              <div
-                className="absolute bottom-10 right-10 w-40 h-40 bg-pink-400 rounded-full filter blur-3xl opacity-30 animate-pulse"
-                style={{ animationDelay: "1.5s" }}
-              ></div>
-
-              <div className="relative flex flex-col md:flex-row-reverse items-center p-8 md:p-10 gap-8">
+            {/* Provider Recruitment Banner */}
+            <div className="relative overflow-hidden bg-[var(--color-blue-300)] rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 group">
+              <div className="relative flex flex-col lg:flex-row-reverse items-center justify-between p-10 lg:p-12 gap-10">
                 {/* Content */}
-                <div className="flex-1 text-white z-10 md:text-right">
-                  <div className="flex items-center gap-2 mb-4 md:justify-end">
-                    <TrendingUp className="w-5 h-5 text-green-400 animate-pulse" />
-                    <span className="px-4 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-400 text-purple-900 text-xs font-bold tracking-wider rounded-full shadow-lg">
+                <div className="flex-1 text-white z-10 lg:text-right max-w-2xl">
+                  <div className="flex items-center gap-2 mb-6 lg:justify-end">
+                    <TrendingUp className="w-6 h-6 text-[var(--color-orange-100)]" />
+                    <span className="px-4 py-2 bg-[var(--color-orange-100)] text-[var(--color-darkblue)] text-xs font-bold tracking-wider rounded-full shadow-lg">
                       💰 EARN DAILY
                     </span>
                   </div>
 
-                  <h3 className="text-3xl md:text-4xl font-bold leading-tight mb-3">
-                    <span className="text-yellow-300">Need Quick Cash?</span>
+                  <h3 className="text-h2 font-bold leading-tight mb-4 text-white">
+                    <span className="text-[var(--color-orange-100)]">Need Quick Cash?</span>
                     <br />
-                    Join{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-yellow-200">
-                      5,000+ Providers
-                    </span>
+                    Join 5,000+ Providers
                     <br />
                     Earning with Us
                   </h3>
 
-                  <p className="text-purple-100 text-lg mb-6 max-w-md md:ml-auto">
+                  <p className="text-white/80 text-lg mb-8 max-w-lg lg:ml-auto">
                     Start earning today with flexible hours and guaranteed
                     payments
                   </p>
 
-                  <div className="flex items-center gap-4 mb-6 md:justify-end flex-wrap">
+                  <div className="flex items-center gap-6 mb-8 lg:justify-end flex-wrap">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-yellow-300">
+                      <div className="text-3xl font-bold text-[var(--color-orange-100)]">
                         ₦50K+
                       </div>
-                      <div className="text-xs text-purple-200">
+                      <div className="text-xs text-white/70">
                         Avg. Monthly
                       </div>
                     </div>
                     <div className="w-px h-12 bg-white/20"></div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-pink-300">
+                      <div className="text-3xl font-bold text-[var(--color-orange-100)]">
                         4.8★
                       </div>
-                      <div className="text-xs text-purple-200">
+                      <div className="text-xs text-white/70">
                         Provider Rating
                       </div>
                     </div>
                   </div>
 
-                  <button className="group/btn px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-400 text-purple-900 rounded-2xl hover:from-yellow-300 hover:to-orange-300 transition-all duration-300 font-bold text-base shadow-xl hover:shadow-2xl hover:scale-105 flex items-center gap-2 md:ml-auto">
+                  <button className="group/btn px-8 py-4 bg-[var(--color-orange-100)] text-[var(--color-darkblue)] rounded-xl hover:bg-[var(--color-orange-200)] transition-all duration-300 font-bold text-base shadow-lg hover:shadow-xl flex items-center gap-2 lg:ml-auto">
                     Join Now
                     <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
 
-                {/* Image Container with floating effect */}
-                <div className="relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-pink-400/20 backdrop-blur-md rounded-full group-hover:scale-110 transition-transform duration-700"></div>
-                  <div className="relative w-full h-full bg-white/10 backdrop-blur-xl rounded-full flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-500 border-4 border-white/20 shadow-2xl">
-                    <div className="text-9xl animate-bounce">👷</div>
+                {/* Image Container */}
+                <div className="relative w-64 h-64 lg:w-80 lg:h-80 flex-shrink-0">
+                  <div className="relative w-full h-full bg-white/10 rounded-3xl overflow-hidden group-hover:scale-105 transition-transform duration-300 border-2 border-white/20 shadow-lg">
+                    <Image
+                      src="/images/service-worker.svg"
+                      alt="Professional worker services"
+                      fill
+                      className="object-cover drop-shadow-lg"
+                    />
                   </div>
 
-                  {/* Floating badges */}
-                  <div className="absolute -top-4 -right-4 bg-green-400 text-green-900 px-4 py-2 rounded-full font-bold text-sm shadow-lg animate-pulse">
+                  {/* Badge */}
+                  <div className="absolute -top-3 -right-3 bg-[var(--color-orange-100)] text-[var(--color-darkblue)] px-4 py-2 rounded-full font-bold text-sm shadow-xl">
                     +500 this week
                   </div>
                 </div>
